@@ -11,43 +11,53 @@ import nl.hva.ict.ss.pathfinding.weigthedgraph.EdgeWeightedDigraph;
 public class Main {
 
 
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         TileWorldUtil.outputDir = "C:/Users/seesalt/output/";
         for (int i = 1; i <= 21; i++) {
-            EdgeWeightedDigraph graafD =  new EdgeWeightedDigraph("i" + i);
+            EdgeWeightedDigraph graafD = new EdgeWeightedDigraph("i" + i);
 
             final int start = graafD.getStart();
             final int finish = graafD.getEnd();
 
             final Dijkstra dijkstra = new Dijkstra(graafD, start);
             if (dijkstra.hasPathTo(finish)) {
-               graafD.tekenPad(dijkstra.pathTo(finish));
-               graafD.save("i" + i + "-dijkstra");
+                graafD.tekenPad(dijkstra.pathTo(finish));
+                graafD.save("i" + i + "-dijkstra");
             }
 
             EdgeWeightedDigraph graafF = new EdgeWeightedDigraph("i" + i);
             FloydWarshall floydWarshall = new FloydWarshall(graafF.createAdjMatrixEdgeWeightedDigraph());
-            if (floydWarshall.hasPath(start,finish)) {
-                graafF.tekenPad(floydWarshall.path(start,finish));
+            if (floydWarshall.hasPath(start, finish)) {
+                graafF.tekenPad(floydWarshall.path(start, finish));
                 graafF.save("i" + i + "-floyd");
             }
 
+            if (dijkstra.hasPathTo(finish)) {
+                System.out.printf("i%d;\t%d;\t%d;\t%1.0f;\t\t%d;\t%d;\t%1.0f;\n",
+                        i,
+                        dijkstra.nodeCount(),
+                        length(dijkstra.pathTo(finish)),
+                        dijkstra.distTo(finish),
+                        floydWarshall.getFloydCounter(),
+                        length(floydWarshall.path(start, finish)),
+                        floydWarshall.dist(start, finish)
+                );
+            } else {
+                System.out.printf("i%d;-;-;-;-\n", i);
+            }
 
         }
+    }
 
-
-
-        // TODO Here you can do your experiments.
-
-        // Please have a good look at the constructors of EdgeWeightedDigraph!
-
-        // Before you save any images make sure the value of TileWorldUtil.outputDir points to an
-        // existing folder and ands with a '/'!
-        // Example: TileWorldUtil.outputDir = "/Users/nico/output/";
+    private static <T> int length(Iterable<T> iterable) {
+        int length = 0;
+        for (T notNeeded : iterable) {
+            length++;
+        }
+        return length;
     }
 
 }
