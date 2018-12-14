@@ -1,15 +1,13 @@
 package nl.hva.ict.ss.pathfinding.tileworld;
 
-import java.awt.Graphics;
+import javax.imageio.IIOException;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-
-import javax.imageio.IIOException;
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 
 /**
  * TileWorldUtil is a utility class for reading, writing and drawing tile worlds. A
@@ -23,15 +21,6 @@ import javax.swing.WindowConstants;
 public class TileWorldUtil implements TileWorld {
 
     /**
-     * The directory where all tile world images that will be searched are
-     * stored
-     */
-    public static String inputDir = "/input/";
-    /**
-     * The directory where all tile world solution images are stored
-     */
-    public static String outputDir = "/output/";
-    /**
      * The format/extension of the image that is saved.
      */
     private static final String FILE_EXTENSION = "png";
@@ -41,6 +30,15 @@ public class TileWorldUtil implements TileWorld {
     private static final int X_BORDER = 16;
     private static final int Y_BORDER = 38;
     private static final int NO_INDEX = -1;
+    /**
+     * The directory where all tile world images that will be searched are
+     * stored
+     */
+    public static String inputDir = "/input/";
+    /**
+     * The directory where all tile world solution images are stored
+     */
+    public static String outputDir = "/output/";
     /**
      * TileWorldUtil attributes
      */
@@ -61,7 +59,7 @@ public class TileWorldUtil implements TileWorld {
     /**
      * An empty TileWorld is created by providing its width and height.
      *
-     * @param width Width of the tile world.
+     * @param width  Width of the tile world.
      * @param height Height of the tile world.
      */
     public TileWorldUtil(int width, int height) {
@@ -212,12 +210,12 @@ public class TileWorldUtil implements TileWorld {
     /**
      * Writes an image to a file.
      *
-     * @param image The image to be written.
+     * @param image    The image to be written.
      * @param fileName The file name of the destination file.
      */
     private void writeImage(BufferedImage image, String fileName) {
         try {
-			File outputFile = new File(fileName + "." + FILE_EXTENSION);
+            File outputFile = new File(fileName + "." + FILE_EXTENSION);
             ImageIO.write(image, FILE_EXTENSION, outputFile);
 
         } catch (IOException ioexp) {

@@ -1,7 +1,7 @@
 package nl.hva.ict.ss.pathfinding.tileworld;
 
-import java.awt.Graphics;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * TileWorldPanel is a javax.swing.JPanel for showing a tile world. A tile world

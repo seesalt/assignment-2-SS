@@ -1,6 +1,6 @@
 package nl.hva.ict.ss.pathfinding.tileworld;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * TileType is an enumeration representing the values a tile can have. Every
@@ -34,22 +34,6 @@ public enum TileType implements RGBColor, Cost {
         this.diagonalCost = diagonalCost;
     }
 
-    public double getCost() {
-        return cost;
-    }
-
-    public double getDiagonalCost() {
-        return diagonalCost;
-    }
-
-    public int getRgbColor() {
-        return rgbColor;
-    }
-
-    public Color getColor() {
-        return new Color(rgbColor);
-    }
-
     /**
      * Converts a RGB color to the corresponding tile
      *
@@ -64,5 +48,21 @@ public enum TileType implements RGBColor, Cost {
         }
         System.err.printf("Unknown rgbColor in picture: %x ", rgbColor);
         return UNKNOWN;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public double getDiagonalCost() {
+        return diagonalCost;
+    }
+
+    public int getRgbColor() {
+        return rgbColor;
+    }
+
+    public Color getColor() {
+        return new Color(rgbColor);
     }
 }

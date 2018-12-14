@@ -34,6 +34,7 @@ public class FloydWarshall {
     private boolean hasNegativeCycle;  // is there a negative cycle?
     private double[][] distTo;  // distTo[v][w] = length of shortest v->w path
     private DirectedEdge[][] edgeTo;  // edgeTo[v][w] = last edge on shortest v->w path
+    private int floydCounter = 0;
 
     /**
      * Computes a shortest paths tree from each vertex to to every other vertex in
@@ -73,6 +74,7 @@ public class FloydWarshall {
             for (int v = 0; v < V; v++) {
                 if (edgeTo[v][i] == null) continue;  // optimization
                 for (int w = 0; w < V; w++) {
+                    floydCounter++;
                     if (distTo[v][w] > distTo[v][i] + distTo[i][w]) {
                         distTo[v][w] = distTo[v][i] + distTo[i][w];
                         edgeTo[v][w] = edgeTo[i][w];
@@ -94,6 +96,9 @@ public class FloydWarshall {
      */
     public boolean hasNegativeCycle() {
         return hasNegativeCycle;
+    }
+    public int getFloydCounter(){
+        return floydCounter;
     }
 
     /**
